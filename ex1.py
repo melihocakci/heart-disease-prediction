@@ -1,7 +1,6 @@
 from sklearn import datasets
 from sklearn import metrics
 from sklearn.naive_bayes import GaussianNB
-from sklearn.naive_bayes import BernoulliNB
 
 dataset = datasets.load_iris()
 model = GaussianNB()
