@@ -1,4 +1,3 @@
-from random import gauss
 import pandas as pd # for data manipulation
 import numpy as np
 
@@ -16,34 +15,17 @@ from sklearn.naive_bayes import CategoricalNB
 from sklearn.naive_bayes import BernoulliNB
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 df = pd.read_csv('heart_2020_cleaned.csv')
-# i = 0
-# for column in df:
-#     print(i)
-#     i += 1
-#     print(df[column].value_counts())
-#     print('-------------------------------------------------')
 
-df['BMI'] = pd.qcut(df['BMI'], 5, duplicates='drop')
-df['PhysicalHealth'] = pd.qcut(df['PhysicalHealth'], 5, duplicates='drop')
-df['MentalHealth'] = pd.qcut(df['MentalHealth'], 5, duplicates='drop')
-df['SleepTime'] = pd.qcut(df['SleepTime'], 5, duplicates='drop')
+df['BMI'] = pd.qcut(df['BMI'], 10, duplicates='drop')
+df['PhysicalHealth'] = pd.qcut(df['PhysicalHealth'], 6, duplicates='drop')
+df['MentalHealth'] = pd.qcut(df['MentalHealth'], 6, duplicates='drop')
+df['SleepTime'] = pd.qcut(df['SleepTime'], 6, duplicates='drop')
 
-df = df.to_numpy()
-
-gaussian = df[:,[1,5,6,14]]
-bernoulli = df[:,[2,3,4,7,8,12,15,16,17]]
-categorical = df[:,[2,3,4,7,8,9,10,11,12,13,15,16,17]]
-all = df[:,[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]]
-
-y = df[:,0]
-
-############################
-x =  all
-
-model = CategoricalNB()
-############################
+y = df['HeartDisease']
+x = df.drop('HeartDisease', axis=1)
 
 enc = LabelEncoder()
 y = enc.fit_transform(y)
@@ -52,6 +34,8 @@ enc = OrdinalEncoder()
 x = enc.fit_transform(x)
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.15)
+
+model = CategoricalNB()
 
 model.fit(x_train, y_train)
 
@@ -62,3 +46,5 @@ print('--------------------------------------------------------')
 print('Classification Report:\n\n', classification_report(y_test, y_pred, target_names=['No','Yes']))
 print('--------------------------------------------------------')
 print('Confusion Matrix:\n\n', confusion_matrix(y_test, y_pred))
+
+
