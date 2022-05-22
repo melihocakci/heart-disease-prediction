@@ -68,6 +68,7 @@ mat = confusion_matrix(y_test, y_pred, labels=[1,0], normalize='true')
 df_cm = pd.DataFrame(mat, index = ['Positive', 'Negative'], columns = ['Positive', 'Negative'])
 plt.figure(dpi=100)
 plt.style.use('fivethirtyeight')
+plt.title('Naive bayes')
 
 sn.heatmap(df_cm, annot=True)
 
@@ -92,6 +93,7 @@ mat = confusion_matrix(y_test, y_pred, labels=[1,0], normalize='true')
 df_cm = pd.DataFrame(mat, index = ['Positive', 'Negative'], columns = ['Positive', 'Negative'])
 plt.figure(dpi=100)
 plt.style.use('fivethirtyeight')
+plt.title('Decision tree')
 
 sn.heatmap(df_cm, annot=True)
 
@@ -116,6 +118,7 @@ mat = confusion_matrix(y_test, y_pred, labels=[1,0], normalize='true')
 df_cm = pd.DataFrame(mat, index = ['Positive', 'Negative'], columns = ['Positive', 'Negative'])
 plt.figure(dpi=100)
 plt.style.use('fivethirtyeight')
+plt.title('Random forest')
 
 sn.heatmap(df_cm, annot=True)
 
@@ -140,6 +143,7 @@ mat = confusion_matrix(y_test, y_pred, labels=[1,0], normalize='true')
 df_cm = pd.DataFrame(mat, index = ['Positive', 'Negative'], columns = ['Positive', 'Negative'])
 plt.figure(dpi=100)
 plt.style.use('fivethirtyeight')
+plt.title('K-nearest neighbors')
 sn.heatmap(df_cm, annot=True)
 
 plt.savefig('fig/knearest.png', bbox_inches='tight')
@@ -162,8 +166,6 @@ plt.title('accuracy')
 
 plt.savefig('fig/accuracy.png', bbox_inches='tight')
 plt.show()
-
-plt.clf()
 
 
 # %%
@@ -200,8 +202,6 @@ for column in columns:
 
     plt.savefig('fig/%s.png'% (column), bbox_inches='tight')
     plt.show()
-
-    plt.clf()
 
 
 
